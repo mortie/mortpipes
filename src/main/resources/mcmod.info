@@ -1,0 +1,16 @@
+[
+{
+  "modid": "mortpipes",
+  "name": "Mort Pipes",
+  "description": "A mod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Martin Dørum Nygaard"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

@@ -1,0 +1,6 @@
+{
+	"parent": "mortpipes:model/pipe_all",
+	"textures": {
+		"all": "mortpipes:blocks/pipe_dumb"
+	}
+}

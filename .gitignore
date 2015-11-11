@@ -1,0 +1,5 @@
+build/
+eclipse/
+forge-*-changelog.txt
+minecraftForge-*.txt
+.gradle
