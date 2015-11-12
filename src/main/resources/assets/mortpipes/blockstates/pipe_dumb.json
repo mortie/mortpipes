@@ -1,18 +1,25 @@
 {
 	"forge_marker": 1,
 	"defaults": {
-		"model": "mortpipes:pipe",
 		"uvlock": true,
+		"model": "mortpipes:pipe",
 
 		"textures": {
 			"pipe": "mortpipes:blocks/pipe_dumb",
-			"pipe_connector": "mortpipes:blocks/pipe_dumb_connector"
+			"pipe_connector": "mortpipes:blocks/pipe_dumb_connector",
+			"pipe_connector_inventory": "mortpipes:blocks/pipe_dumb_connector_inventory"
 		}
 	},
 
 	"variants": {
-		"north": {
+		"noblock": {
 			"true": {
+				"model": "mortpipes:pipe_noblock"
+			},
+			"false": {}
+		},
+		"north": {
+			"pipe": {
 				"submodel": {
 					"connector_north": {
 						"model": "mortpipes:pipe_connector",
@@ -20,11 +27,19 @@
 					}
 				}
 			},
-			"false": {}
+			"inventory": {
+				"submodel": {
+					"connector_north": {
+						"model": "mortpipes:pipe_connector_inventory",
+						"y": 90
+					}
+				}
+			},
+			"none": {}
 		},
 
 		"south": {
-			"true": {
+			"pipe": {
 				"submodel": {
 					"connector_south": {
 						"model": "mortpipes:pipe_connector",
@@ -32,11 +47,19 @@
 					}
 				}
 			},
-			"false": {}
+			"inventory": {
+				"submodel": {
+					"connector_south": {
+						"model": "mortpipes:pipe_connector_inventory",
+						"y": 270
+					}
+				}
+			},
+			"none": {}
 		},
 
 		"east": {
-			"true": {
+			"pipe": {
 				"submodel": {
 					"connector_east": {
 						"model": "mortpipes:pipe_connector",
@@ -44,22 +67,37 @@
 					}
 				}
 			},
-			"false": {}
+			"inventory": {
+				"submodel": {
+					"connector_east": {
+						"model": "mortpipes:pipe_connector_inventory",
+						"y": 180
+					}
+				}
+			},
+			"none": {}
 		},
 
 		"west": {
-			"true": {
+			"pipe": {
 				"submodel": {
 					"connector_west": {
 						"model": "mortpipes:pipe_connector"
 					}
 				}
 			},
-			"false": {}
+			"inventory": {
+				"submodel": {
+					"connector_west": {
+						"model": "mortpipes:pipe_connector_inventory"
+					}
+				}
+			},
+			"none": {}
 		},
 
 		"up": {
-			"true": {
+			"pipe": {
 				"submodel": {
 					"connector_up": {
 						"model": "mortpipes:pipe_connector_up",
@@ -67,18 +105,33 @@
 					}
 				}
 			},
-			"false": {}
+			"inventory": {
+				"submodel": {
+					"connector_up": {
+						"model": "mortpipes:pipe_connector_up_inventory",
+						"x": 180
+					}
+				}
+			},
+			"none": {}
 		},
 
 		"down": {
-			"true": {
+			"pipe": {
 				"submodel": {
 					"connector_down": {
 						"model": "mortpipes:pipe_connector_up"
 					}
 				}
 			},
-			"false": {}
+			"inventory": {
+				"submodel": {
+					"connector_down": {
+						"model": "mortpipes:pipe_connector_up_inventory"
+					}
+				}
+			},
+			"none": {}
 		}
 	}
 }
