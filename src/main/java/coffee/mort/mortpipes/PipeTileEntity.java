@@ -10,9 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 class PipeTileEntity extends TileEntity {
 	public List<ItemStack> items = new ArrayList<ItemStack>();
 
-	public PipeTileEntity() {
-		System.out.println("================================PIPE========================================+++++++");
-	}
+	public PipeTileEntity() {}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
