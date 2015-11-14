@@ -1,0 +1,6 @@
+{
+	"parent": "mortpipes:block/pipe",
+	"textures": {
+		"pipe": "mortpipes:blocks/pipe_extract"
+	}
+}

@@ -4,6 +4,7 @@ import coffee.mort.mortpipes.MortBlockContainer;
 import coffee.mort.mortpipes.MortItem;
 import coffee.mort.mortpipes.PipeTileEntity;
 import coffee.mort.mortpipes.DumbPipe;
+import coffee.mort.mortpipes.ExtractPipe;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class MortPipes {
 	public static final String VERSION = "0.0.0";
 
 	public static MortBlockContainer blockDumbPipe;
+	public static MortBlockContainer blockExtractPipe;
 
 	private static void addRenderer(RenderItem ri, MortBlockContainer block) {
 		ri.getItemModelMesher().register(Item.getItemFromBlock(block), 0, new ModelResourceLocation(MortPipes.MODID + ":" + block.getName(), "inventory"));
@@ -38,6 +40,7 @@ public class MortPipes {
 	@EventHandler
 	public void preinit(FMLPreInitializationEvent event) {
 		blockDumbPipe = new DumbPipe();
+		blockExtractPipe = new ExtractPipe();
 	}
 
 	@EventHandler
@@ -49,6 +52,7 @@ public class MortPipes {
 
 			//Blocks
 			addRenderer(ri, blockDumbPipe);
+			addRenderer(ri, blockExtractPipe);
 		}
 	}
 }

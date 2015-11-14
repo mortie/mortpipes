@@ -5,9 +5,9 @@
 		"model": "mortpipes:pipe",
 
 		"textures": {
-			"pipe": "mortpipes:blocks/pipe_dumb",
-			"pipe_connector": "mortpipes:blocks/pipe_dumb",
-			"pipe_connector_inventory": "mortpipes:blocks/pipe_dumb"
+			"pipe": "mortpipes:blocks/pipe_extract",
+			"pipe_connector": "mortpipes:blocks/pipe_extract",
+			"pipe_connector_inventory": "mortpipes:blocks/pipe_extract"
 		}
 	},
 

@@ -1,6 +1,7 @@
 package coffee.mort.mortpipes;
 
 import coffee.mort.mortpipes.MortBlockContainer;
+import coffee.mort.mortpipes.PipeTileEntity;
 
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.EnumFacing;
@@ -89,6 +90,14 @@ class Pipe extends MortBlockContainer {
 		} else {
 			state = state.withProperty(NOBLOCK, false);
 		}
+
+		PipeTileEntity te = (PipeTileEntity)worldIn.getTileEntity(pos);
+		te.north = north;
+		te.east = east;
+		te.south = south;
+		te.west = west;
+		te.up = up;
+		te.down = down;
 
 		return state;
 	}
