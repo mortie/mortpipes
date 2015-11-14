@@ -3,6 +3,7 @@ package coffee.mort.mortpipes;
 import coffee.mort.mortpipes.MortBlockContainer;
 import coffee.mort.mortpipes.MortItem;
 import coffee.mort.mortpipes.PipeTileEntity;
+import coffee.mort.mortpipes.ExtractPipeTileEntity;
 import coffee.mort.mortpipes.DumbPipe;
 import coffee.mort.mortpipes.ExtractPipe;
 
@@ -38,21 +39,19 @@ public class MortPipes {
 	}
 
 	@EventHandler
-	public void preinit(FMLPreInitializationEvent event) {
-		blockDumbPipe = new DumbPipe();
-		blockExtractPipe = new ExtractPipe();
-	}
-
-	@EventHandler
 	public void init(FMLInitializationEvent event) {
+
+		//Registering tile entities
+		GameRegistry.registerTileEntity(PipeTileEntity.class, "pipe");
+		GameRegistry.registerTileEntity(ExtractPipeTileEntity.class, "pipe_extract");
 
 		//Register renders
 		if (event.getSide() == Side.CLIENT) {
 			RenderItem ri = Minecraft.getMinecraft().getRenderItem();
 
 			//Blocks
-			addRenderer(ri, blockDumbPipe);
-			addRenderer(ri, blockExtractPipe);
+			addRenderer(ri, new DumbPipe());
+			addRenderer(ri, new ExtractPipe());
 		}
 	}
 }

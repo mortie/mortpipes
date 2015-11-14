@@ -38,6 +38,7 @@ class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 
 	@Override
 	public void update() {
+		System.out.println("hi");
 		if (this.getWorld().isRemote) {
 			updateCounter -= 1;
 			if (updateCounter <= 0) {
@@ -68,7 +69,7 @@ class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 	}
 
 	public void outputItem(MovingItemStack movingStack) {
-		
+		System.out.println("Outputting "+movingStack.stack.getItem().getUnlocalizedName());
 	}
 
 	public class MovingItemStack {
