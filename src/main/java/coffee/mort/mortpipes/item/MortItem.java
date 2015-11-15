@@ -1,4 +1,4 @@
-package coffee.mort.mortpipes;
+package coffee.mort.mortpipes.item;
 
 import coffee.mort.mortpipes.MortPipes;
 
@@ -6,7 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-abstract class MortItem extends Item {
+public abstract class MortItem extends Item {
 	private final String name;
 
 	public MortItem(String name) {

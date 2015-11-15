@@ -1,12 +1,12 @@
-package coffee.mort.mortpipes;
+package coffee.mort.mortpipes.block;
 
-import coffee.mort.mortpipes.LogicPipe;
-import coffee.mort.mortpipes.ExtractPipeTileEntity;
+import coffee.mort.mortpipes.block.LogicPipe;
+import coffee.mort.mortpipes.tileentity.ExtractPipeTileEntity;
 
 import net.minecraft.world.World;
 import net.minecraft.tileentity.TileEntity;
 
-class ExtractPipe extends LogicPipe {
+public class ExtractPipe extends LogicPipe {
 	public ExtractPipe() {
 		super("pipe_extract");
 	}

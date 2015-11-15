@@ -1,11 +1,12 @@
 package coffee.mort.mortpipes;
 
-import coffee.mort.mortpipes.MortBlockContainer;
-import coffee.mort.mortpipes.MortItem;
-import coffee.mort.mortpipes.PipeTileEntity;
-import coffee.mort.mortpipes.ExtractPipeTileEntity;
-import coffee.mort.mortpipes.DumbPipe;
-import coffee.mort.mortpipes.ExtractPipe;
+import coffee.mort.mortpipes.block.MortBlockContainer;
+import coffee.mort.mortpipes.block.DumbPipe;
+import coffee.mort.mortpipes.block.ExtractPipe;
+import coffee.mort.mortpipes.item.MortItem;
+import coffee.mort.mortpipes.tileentity.PipeTileEntity;
+import coffee.mort.mortpipes.tileentity.LogicPipeTileEntity;
+import coffee.mort.mortpipes.tileentity.ExtractPipeTileEntity;
 
 import java.util.List;
 import java.util.ArrayList;

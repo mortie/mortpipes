@@ -1,7 +1,7 @@
-package coffee.mort.mortpipes;
+package coffee.mort.mortpipes.tileentity;
 
-import coffee.mort.mortpipes.Pipe;
-import coffee.mort.mortpipes.Pipe.AttachType;
+import coffee.mort.mortpipes.block.Pipe;
+import coffee.mort.mortpipes.block.Pipe.AttachType;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
+public class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 	private static int updateTimeout = 10;
 	private int updateCounter = 0;
 	private int speed = 500;

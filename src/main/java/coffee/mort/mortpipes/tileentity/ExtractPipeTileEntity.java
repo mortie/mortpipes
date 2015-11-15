@@ -1,8 +1,8 @@
-package coffee.mort.mortpipes;
+package coffee.mort.mortpipes.tileentity;
 
-import coffee.mort.mortpipes.Pipe;
-import coffee.mort.mortpipes.Pipe.AttachType;
-import coffee.mort.mortpipes.LogicPipeTileEntity;
+import coffee.mort.mortpipes.block.Pipe;
+import coffee.mort.mortpipes.block.Pipe.AttachType;
+import coffee.mort.mortpipes.tileentity.LogicPipeTileEntity;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.BlockPos;
@@ -11,7 +11,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.block.state.IBlockState;
 
-class ExtractPipeTileEntity extends PipeTileEntity {
+public class ExtractPipeTileEntity extends PipeTileEntity {
 	public ExtractPipeTileEntity() {}
 
 	@Override

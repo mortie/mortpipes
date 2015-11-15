@@ -1,7 +1,7 @@
-package coffee.mort.mortpipes;
+package coffee.mort.mortpipes.block;
 
-import coffee.mort.mortpipes.MortBlockContainer;
-import coffee.mort.mortpipes.PipeTileEntity;
+import coffee.mort.mortpipes.block.MortBlockContainer;
+import coffee.mort.mortpipes.tileentity.PipeTileEntity;
 
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.EnumFacing;
@@ -18,7 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.IBlockAccess;
 
-class Pipe extends MortBlockContainer {
+public class Pipe extends MortBlockContainer {
 	public static final PropertyEnum NORTH = PropertyEnum.create("north", Pipe.AttachType.class);
 	public static final PropertyEnum EAST = PropertyEnum.create("east", Pipe.AttachType.class);
 	public static final PropertyEnum SOUTH = PropertyEnum.create("south", Pipe.AttachType.class);

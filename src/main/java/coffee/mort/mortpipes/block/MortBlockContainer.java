@@ -1,4 +1,4 @@
-package coffee.mort.mortpipes;
+package coffee.mort.mortpipes.block;
 
 import coffee.mort.mortpipes.MortPipes;
 
@@ -7,7 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-abstract class MortBlockContainer extends BlockContainer {
+public abstract class MortBlockContainer extends BlockContainer {
 	private final String name;
 
 	public MortBlockContainer(Material m, String name) {
