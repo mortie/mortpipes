@@ -15,7 +15,7 @@ abstract class MortBlockContainer extends BlockContainer {
 		this.name = name;
 
 		setCreativeTab(CreativeTabs.tabBlock);
-		setUnlocalizedName(MortPipes.MODID+"_"+name);
+		setUnlocalizedName(MortPipes.MODID+"."+name);
 		GameRegistry.registerBlock(this, name);
 	}
 

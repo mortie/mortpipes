@@ -39,19 +39,25 @@ public class MortPipes {
 	}
 
 	@EventHandler
-	public void init(FMLInitializationEvent event) {
+	public void preInit(FMLPreInitializationEvent event) {
+		blockDumbPipe = new DumbPipe();
+		blockExtractPipe = new ExtractPipe();
 
-		//Registering tile entities
 		GameRegistry.registerTileEntity(PipeTileEntity.class, "pipe");
+		GameRegistry.registerTileEntity(LogicPipeTileEntity.class, "pipe_logic");
 		GameRegistry.registerTileEntity(ExtractPipeTileEntity.class, "pipe_extract");
+	}
+
+	@EventHandler
+	public void init(FMLInitializationEvent event) {
 
 		//Register renders
 		if (event.getSide() == Side.CLIENT) {
 			RenderItem ri = Minecraft.getMinecraft().getRenderItem();
 
 			//Blocks
-			addRenderer(ri, new DumbPipe());
-			addRenderer(ri, new ExtractPipe());
+			addRenderer(ri, blockDumbPipe);
+			addRenderer(ri, blockExtractPipe);
 		}
 	}
 }

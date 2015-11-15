@@ -30,16 +30,18 @@ class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
 	}
 
 	@Override
 	public void update() {
 		System.out.println("hi");
-		if (this.getWorld().isRemote) {
+		if (!this.getWorld().isRemote) {
 			updateCounter -= 1;
 			if (updateCounter <= 0) {
 				updateCounter = updateTimeout;
