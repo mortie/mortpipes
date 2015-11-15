@@ -38,20 +38,25 @@ public class Pipe extends MortBlockContainer {
 			.withProperty(UP, AttachType.NONE)
 			.withProperty(DOWN, AttachType.NONE)
 			.withProperty(NOBLOCK, false));
-
-		setHitbox(this.blockState.getBaseState());
 	}
 
-	private void setHitbox(IBlockState state) {
-		double min = 0.2;
-		double max = 0.8;
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos) {
+		IBlockState state = worldIn.getBlockState(pos);
 
-		this.minX = min;
-		this.maxX = max;
-		this.minY = min;
-		this.maxY = max;
-		this.minZ = min;
-		this.maxZ = max;
+		float min = 0.3F;
+		float max = 0.7F;
+		float bigmin = 0F;
+		float bigmax = 1F;
+
+		float minX = min;
+		float maxX = max;
+		float minY = min;
+		float maxY = max;
+		float minZ = min;
+		float maxZ = max;
+
+		this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 
 	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
@@ -90,14 +95,6 @@ public class Pipe extends MortBlockContainer {
 		} else {
 			state = state.withProperty(NOBLOCK, false);
 		}
-
-		PipeTileEntity te = (PipeTileEntity)worldIn.getTileEntity(pos);
-		te.north = north;
-		te.east = east;
-		te.south = south;
-		te.west = west;
-		te.up = up;
-		te.down = down;
 
 		return state;
 	}

@@ -1,28 +1,25 @@
 package coffee.mort.mortpipes.tileentity;
 
+import coffee.mort.mortpipes.MortPipes;
 import coffee.mort.mortpipes.block.Pipe;
-import coffee.mort.mortpipes.block.Pipe.AttachType;
 
 import java.util.List;
 import java.util.ArrayList;
 
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.BlockPos;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.world.World;
 
 public class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 	private static int updateTimeout = 10;
 	private int updateCounter = 0;
 	private int speed = 500;
-
-	public AttachType north = AttachType.NONE;
-	public AttachType east = AttachType.NONE;
-	public AttachType south = AttachType.NONE;
-	public AttachType west = AttachType.NONE;
-	public AttachType up = AttachType.NONE;
-	public AttachType down = AttachType.NONE;
 
 	public List<MovingItemStack> movingItems = new ArrayList<MovingItemStack>();
 
@@ -40,7 +37,6 @@ public class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 
 	@Override
 	public void update() {
-		System.out.println("hi");
 		if (!this.getWorld().isRemote) {
 			updateCounter -= 1;
 			if (updateCounter <= 0) {
@@ -57,8 +53,9 @@ public class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 	public void onServerUpdate() {
 		long time = System.currentTimeMillis();
 
-		for (MovingItemStack movingStack: movingItems) {
-			if (movingStack.insertedTime < time - speed) {
+		for (int i = 0; i < movingItems.size(); ++i) {
+			MovingItemStack movingStack = movingItems.get(i);
+			if (movingStack != null && movingStack.insertedTime < time - speed) {
 				movingItems.remove(movingStack);
 				outputItem(movingStack);
 			}
@@ -71,7 +68,7 @@ public class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 	}
 
 	public void outputItem(MovingItemStack movingStack) {
-		System.out.println("Outputting "+movingStack.stack.getItem().getUnlocalizedName());
+		MortPipes.spawnItemStack(this.getWorld(), this.pos, movingStack.stack);
 	}
 
 	public class MovingItemStack {
@@ -83,6 +80,6 @@ public class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 			this.stack = stack;
 			this.fromFace = fromFace;
 			this.insertedTime = System.currentTimeMillis();
+			}
 		}
-	}
 }

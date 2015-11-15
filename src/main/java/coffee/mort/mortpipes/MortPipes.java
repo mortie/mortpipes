@@ -8,14 +8,19 @@ import coffee.mort.mortpipes.tileentity.PipeTileEntity;
 import coffee.mort.mortpipes.tileentity.LogicPipeTileEntity;
 import coffee.mort.mortpipes.tileentity.ExtractPipeTileEntity;
 
+import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 
+import net.minecraft.util.BlockPos;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -25,6 +30,8 @@ import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid = MortPipes.MODID, version = MortPipes.VERSION)
 public class MortPipes {
+	private static final Random rand = new Random();
+
 	public static final String MODID = "mortpipes";
 	public static final String VERSION = "0.0.0";
 
@@ -41,12 +48,12 @@ public class MortPipes {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		GameRegistry.registerTileEntity(PipeTileEntity.class, "pipe_te");
+		GameRegistry.registerTileEntity(LogicPipeTileEntity.class, "pipe_logic_te");
+		GameRegistry.registerTileEntity(ExtractPipeTileEntity.class, "pipe_extract_te");
+
 		blockDumbPipe = new DumbPipe();
 		blockExtractPipe = new ExtractPipe();
-
-		GameRegistry.registerTileEntity(PipeTileEntity.class, "pipe");
-		GameRegistry.registerTileEntity(LogicPipeTileEntity.class, "pipe_logic");
-		GameRegistry.registerTileEntity(ExtractPipeTileEntity.class, "pipe_extract");
 	}
 
 	@EventHandler
@@ -60,5 +67,25 @@ public class MortPipes {
 			addRenderer(ri, blockDumbPipe);
 			addRenderer(ri, blockExtractPipe);
 		}
+	}
+
+	public static void spawnItemStack(World worldIn, BlockPos pos, ItemStack stack) {
+		float offX = rand.nextFloat() * 0.8F + 0.1F;
+		float offY = rand.nextFloat() * 0.8F + 0.1F;
+		float offZ = rand.nextFloat() * 0.8F + 0.1F;
+
+		EntityItem entity = new EntityItem(
+			worldIn,
+			pos.getX() + offX,
+			pos.getY() + offY,
+			pos.getZ() + offZ,
+			new ItemStack(stack.getItem(), stack.stackSize, stack.getMetadata())
+		);
+
+		entity.motionX = rand.nextGaussian() * 0.05;
+		entity.motionY = rand.nextGaussian() * 0.05;
+		entity.motionZ = rand.nextGaussian() * 0.05;
+
+		worldIn.spawnEntityInWorld(entity);
 	}
 }

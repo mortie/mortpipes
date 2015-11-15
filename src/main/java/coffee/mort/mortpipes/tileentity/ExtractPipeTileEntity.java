@@ -1,7 +1,6 @@
 package coffee.mort.mortpipes.tileentity;
 
 import coffee.mort.mortpipes.block.Pipe;
-import coffee.mort.mortpipes.block.Pipe.AttachType;
 import coffee.mort.mortpipes.tileentity.LogicPipeTileEntity;
 
 import net.minecraft.util.EnumFacing;
@@ -18,18 +17,15 @@ public class ExtractPipeTileEntity extends PipeTileEntity {
 	public void onServerUpdate() {
 		super.onServerUpdate();
 
-		tryInsertItemFrom(north, EnumFacing.NORTH);
-		tryInsertItemFrom(east, EnumFacing.EAST);
-		tryInsertItemFrom(south, EnumFacing.SOUTH);
-		tryInsertItemFrom(west, EnumFacing.WEST);
-		tryInsertItemFrom(up, EnumFacing.UP);
-		tryInsertItemFrom(down, EnumFacing.DOWN);
+		tryInsertItemFrom(EnumFacing.NORTH);
+		tryInsertItemFrom(EnumFacing.EAST);
+		tryInsertItemFrom(EnumFacing.SOUTH);
+		tryInsertItemFrom(EnumFacing.WEST);
+		tryInsertItemFrom(EnumFacing.UP);
+		tryInsertItemFrom(EnumFacing.DOWN);
 	}
 
-	private void tryInsertItemFrom(AttachType type, EnumFacing fromFace) {
-		if (type != AttachType.INVENTORY)
-			return;
-
+	private void tryInsertItemFrom(EnumFacing fromFace) {
 		BlockPos offPos = pos.offset(fromFace);
 		TileEntity te = getWorld().getTileEntity(offPos);
 
@@ -44,9 +40,8 @@ public class ExtractPipeTileEntity extends PipeTileEntity {
 		int l = inv.getSizeInventory();
 
 		for (int i = 0; i < l; ++i) {
-			ItemStack stack = inv.getStackInSlot(i);
+			ItemStack stack = inv.decrStackSize(i, 1);
 			if (stack != null) {
-				System.out.println("slot "+i+" wasn't null");
 				return stack;
 			}
 		}
