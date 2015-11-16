@@ -1,5 +1,6 @@
 package coffee.mort.mortpipes.tileentity;
 
+import coffee.mort.mortpipes.util.ItemUtils;
 import coffee.mort.mortpipes.block.Pipe;
 import coffee.mort.mortpipes.block.Pipe.AttachType;
 import coffee.mort.mortpipes.tileentity.LogicPipeTileEntity;
@@ -34,7 +35,7 @@ public class ExtractPipeTileEntity extends PipeTileEntity {
 		TileEntity te = getWorld().getTileEntity(offPos);
 
 		if (te instanceof IInventory) {
-			ItemStack stack = getNextStack((IInventory)te);
+			ItemStack stack = ItemUtils.getStackFromInventory((IInventory)te, 1, fromFace.getOpposite());
 			if (stack != null)
 				insertItem(stack, fromFace);
 		}

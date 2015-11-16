@@ -104,4 +104,29 @@ public class ItemUtils {
 	public static boolean canCombine(ItemStack stack1, ItemStack stack2) {
 		return stack1.getItem() != stack2.getItem() ? false : (stack1.getMetadata() != stack2.getMetadata() ? false : (stack1.stackSize > stack1.getMaxStackSize() ? false : ItemStack.areItemStackTagsEqual(stack1, stack2)));
 	}
+
+	public static ItemStack getStackFromInventory(IInventory inv, int count, EnumFacing side) {
+		if (inv instanceof ISidedInventory) {
+			ISidedInventory sidedInv = (ISidedInventory)inv;
+			int[] slots = sidedInv.getSlotsForFace(side);
+			for (int i = 0; i < slots.length; ++i) {
+				ItemStack stack = sidedInv.getStackInSlot(slots[i]);
+				if (stack == null)
+					continue;
+				if (!sidedInv.canExtractItem(slots[i], stack, side))
+					continue;
+
+				return sidedInv.decrStackSize(slots[i], count);
+			}
+		} else {
+			int l = inv.getSizeInventory();
+			for (int i = 0; i < l; ++i) {
+				ItemStack stack = inv.decrStackSize(i, count);
+				if (stack != null)
+					return stack;
+			}
+		}
+
+		return null;
+	}
 }

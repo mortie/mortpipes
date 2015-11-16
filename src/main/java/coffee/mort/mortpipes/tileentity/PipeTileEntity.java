@@ -92,7 +92,8 @@ public class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 				((PipeTileEntity)te).insertItem(movingStack.stack, face.getOpposite());
 			} else if (te instanceof IInventory) {
 				ItemStack leftovers = ItemUtils.putStackInInventory((IInventory)te, movingStack.stack, face.getOpposite());
-				ItemUtils.spawnItemStack(this.getWorld(), this.pos, leftovers);
+				if (leftovers != null)
+					ItemUtils.spawnItemStack(this.getWorld(), this.pos, leftovers);
 			} else {
 				ItemUtils.spawnItemStack(this.getWorld(), this.pos, movingStack.stack);
 			}
@@ -130,6 +131,12 @@ public class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 		west = Pipe.canPipeConnect(world, pos, EnumFacing.WEST);
 		up = Pipe.canPipeConnect(world, pos, EnumFacing.UP);
 		down = Pipe.canPipeConnect(world, pos, EnumFacing.DOWN);
+	}
+
+	public void breakBlock() {
+		for (MovingItemStack movingStack: movingItems) {
+			ItemUtils.spawnItemStack(this.getWorld(), this.pos, movingStack.stack);
+		}
 	}
 
 	public class MovingItemStack {

@@ -113,6 +113,11 @@ public class Pipe extends MortBlockContainer {
 		return AttachType.NONE;
 	}
 
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+		PipeTileEntity te = (PipeTileEntity)worldIn.getTileEntity(pos);
+		te.breakBlock();
+	}
+
 	public static enum AttachType implements IStringSerializable {
 		PIPE("pipe"),
 		INVENTORY("inventory"),
