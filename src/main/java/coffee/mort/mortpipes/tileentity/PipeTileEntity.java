@@ -2,6 +2,7 @@ package coffee.mort.mortpipes.tileentity;
 
 import coffee.mort.mortpipes.MortPipes;
 import coffee.mort.mortpipes.block.Pipe;
+import coffee.mort.mortpipes.block.Pipe.AttachType;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -20,6 +21,13 @@ public class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 	private static int updateTimeout = 10;
 	private int updateCounter = 0;
 	private int speed = 500;
+
+	public AttachType north;
+	public AttachType east;
+	public AttachType south;
+	public AttachType west;
+	public AttachType up;
+	public AttachType down;
 
 	public List<MovingItemStack> movingItems = new ArrayList<MovingItemStack>();
 
@@ -51,6 +59,8 @@ public class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 	public void onClientUpdate() {}
 
 	public void onServerUpdate() {
+		this.updateAttachTypes();
+
 		long time = System.currentTimeMillis();
 
 		for (int i = 0; i < movingItems.size(); ++i) {
@@ -68,7 +78,51 @@ public class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 	}
 
 	public void outputItem(MovingItemStack movingStack) {
-		MortPipes.spawnItemStack(this.getWorld(), this.pos, movingStack.stack);
+		EnumFacing face = getOutputFace(movingStack);
+
+		if (face == null) {
+			MortPipes.spawnItemStack(this.getWorld(), this.pos, movingStack.stack);
+		} else {
+			TileEntity te = this.getWorld().getTileEntity(pos.offset(face));
+
+			if (te instanceof PipeTileEntity)
+				((PipeTileEntity)te).insertItem(movingStack.stack, face.getOpposite());
+			else
+				MortPipes.spawnItemStack(this.getWorld(), this.pos, movingStack.stack);
+		}
+	}
+
+	private EnumFacing getOutputFace(MovingItemStack movingStack) {
+		int i = 0;
+		EnumFacing faces[] = new EnumFacing[6];
+
+		if (north != AttachType.NONE && movingStack.fromFace != EnumFacing.NORTH)
+			faces[i++] = EnumFacing.NORTH;
+		if (east != AttachType.NONE && movingStack.fromFace != EnumFacing.EAST)
+			faces[i++] = EnumFacing.EAST;
+		if (south != AttachType.NONE && movingStack.fromFace != EnumFacing.SOUTH)
+			faces[i++] = EnumFacing.SOUTH;
+		if (west != AttachType.NONE && movingStack.fromFace != EnumFacing.WEST)
+			faces[i++] = EnumFacing.WEST;
+		if (up != AttachType.NONE && movingStack.fromFace != EnumFacing.UP)
+			faces[i++] = EnumFacing.UP;
+		if (down != AttachType.NONE && movingStack.fromFace != EnumFacing.DOWN)
+			faces[i++] = EnumFacing.DOWN;
+
+		if (i == 0)
+			return null;
+		else
+			return faces[MortPipes.randInt(0, i - 1)];
+	}
+
+	private void updateAttachTypes() {
+		World world = this.getWorld();
+		north = Pipe.canPipeConnect(world, pos, EnumFacing.NORTH);
+		east = Pipe.canPipeConnect(world, pos, EnumFacing.EAST);
+		south = Pipe.canPipeConnect(world, pos, EnumFacing.SOUTH);
+		west = Pipe.canPipeConnect(world, pos, EnumFacing.WEST);
+		up = Pipe.canPipeConnect(world, pos, EnumFacing.UP);
+		down = Pipe.canPipeConnect(world, pos, EnumFacing.DOWN);
 	}
 
 	public class MovingItemStack {

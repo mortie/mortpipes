@@ -88,4 +88,8 @@ public class MortPipes {
 
 		worldIn.spawnEntityInWorld(entity);
 	}
+
+	public static int randInt(int min, int max) {
+		return rand.nextInt((max - min) + 1) + min;
+	}
 }

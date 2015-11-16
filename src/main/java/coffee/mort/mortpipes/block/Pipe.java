@@ -19,12 +19,12 @@ import net.minecraft.world.World;
 import net.minecraft.world.IBlockAccess;
 
 public class Pipe extends MortBlockContainer {
-	public static final PropertyEnum NORTH = PropertyEnum.create("north", Pipe.AttachType.class);
-	public static final PropertyEnum EAST = PropertyEnum.create("east", Pipe.AttachType.class);
-	public static final PropertyEnum SOUTH = PropertyEnum.create("south", Pipe.AttachType.class);
-	public static final PropertyEnum WEST = PropertyEnum.create("west", Pipe.AttachType.class);
-	public static final PropertyEnum UP = PropertyEnum.create("up", Pipe.AttachType.class);
-	public static final PropertyEnum DOWN = PropertyEnum.create("down", Pipe.AttachType.class);
+	public static final PropertyEnum NORTH = PropertyEnum.create("north", AttachType.class);
+	public static final PropertyEnum EAST = PropertyEnum.create("east", AttachType.class);
+	public static final PropertyEnum SOUTH = PropertyEnum.create("south", AttachType.class);
+	public static final PropertyEnum WEST = PropertyEnum.create("west", AttachType.class);
+	public static final PropertyEnum UP = PropertyEnum.create("up", AttachType.class);
+	public static final PropertyEnum DOWN = PropertyEnum.create("down", AttachType.class);
 	public static final PropertyBool NOBLOCK = PropertyBool.create("noblock");
 
 	public Pipe(String name) {
@@ -99,7 +99,7 @@ public class Pipe extends MortBlockContainer {
 		return state;
 	}
 
-	private AttachType canPipeConnect(IBlockAccess worldIn, BlockPos pos, EnumFacing direction) {
+	public static AttachType canPipeConnect(IBlockAccess worldIn, BlockPos pos, EnumFacing direction) {
 		BlockPos offPos = pos.offset(direction);
 		Block block = worldIn.getBlockState(offPos).getBlock();
 
