@@ -3,6 +3,8 @@ package coffee.mort.mortpipes.tileentity;
 import coffee.mort.mortpipes.MortPipes;
 import coffee.mort.mortpipes.block.Pipe;
 import coffee.mort.mortpipes.block.Pipe.AttachType;
+import coffee.mort.mortpipes.util.RandUtils;
+import coffee.mort.mortpipes.util.ItemUtils;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -14,7 +16,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.world.World;
 
 public class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
@@ -81,14 +84,18 @@ public class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 		EnumFacing face = getOutputFace(movingStack);
 
 		if (face == null) {
-			MortPipes.spawnItemStack(this.getWorld(), this.pos, movingStack.stack);
+			ItemUtils.spawnItemStack(this.getWorld(), this.pos, movingStack.stack);
 		} else {
 			TileEntity te = this.getWorld().getTileEntity(pos.offset(face));
 
-			if (te instanceof PipeTileEntity)
+			if (te instanceof PipeTileEntity) {
 				((PipeTileEntity)te).insertItem(movingStack.stack, face.getOpposite());
-			else
-				MortPipes.spawnItemStack(this.getWorld(), this.pos, movingStack.stack);
+			} else if (te instanceof IInventory) {
+				ItemStack leftovers = ItemUtils.putStackInInventory((IInventory)te, movingStack.stack, face.getOpposite());
+				ItemUtils.spawnItemStack(this.getWorld(), this.pos, leftovers);
+			} else {
+				ItemUtils.spawnItemStack(this.getWorld(), this.pos, movingStack.stack);
+			}
 		}
 	}
 
@@ -112,7 +119,7 @@ public class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 		if (i == 0)
 			return null;
 		else
-			return faces[MortPipes.randInt(0, i - 1)];
+			return faces[RandUtils.randInt(0, i - 1)];
 	}
 
 	private void updateAttachTypes() {
@@ -134,6 +141,6 @@ public class PipeTileEntity extends TileEntity implements IUpdatePlayerListBox {
 			this.stack = stack;
 			this.fromFace = fromFace;
 			this.insertedTime = System.currentTimeMillis();
-			}
 		}
+	}
 }
